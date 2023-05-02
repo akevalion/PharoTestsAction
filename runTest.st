@@ -6,13 +6,13 @@ actionRepo := CommandLineArguments default arguments last.
 cout << 'loading: ' << actionRepo.
 cout crlf.
 repoPath := env at: 'GITHUB_WORKSPACE'.
-actionRepo asFileReference allChildren do: [ :f | 
+"actionRepo asFileReference allChildren do: [ :f | 
 cout << f absolutePath pathString.
-cout crlf ].
-"[ Metacello new
+cout crlf ]."
+[ Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
-    load ] on: MCMergeOrLoadWarning do: [:warning | warning load ]."
+    load ] on: MCMergeOrLoadWarning do: [:warning | warning load ].
 
 cout << repoPath.
 file := '/tmp/testError.txt' asFileReference writeStream.
