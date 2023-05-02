@@ -17,7 +17,7 @@ try {
 
     
     console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash'));
-    const file = Path.join(__dirname, 'runTest.st');
+    const file = path.join(__dirname, 'runTest.st');
     console.log(fs.existsSync(path));
 
     console.log(execSync('./pharo --headless Pharo.image '+file));
