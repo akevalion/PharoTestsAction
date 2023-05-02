@@ -1,13 +1,14 @@
 name: 'Pharo CI'
 description: 'To load and run tests from a pharo project'
 inputs:
-  repo:  # id of input
-    description: 'Package'
+  removes-repo:  # id of input
+    description: 'Name of packages to remove'
     required: true
-    default: 'World'
+    default: '.'
+  
 outputs:
   time: # id of output
     description: 'The current time'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'index.js'
