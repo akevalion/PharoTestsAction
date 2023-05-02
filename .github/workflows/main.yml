@@ -5,11 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: akevalion/PharoTestsAction
+    - name: Run pharo Tests
+      id: tests
+      uses: akevalion/PharoTestsAction@v1
       with:
-        who-to-greet: 'Milton F'
+        repo: 'Milton'
     # Use the output from the `hello` step
     - name: Get the output time
       run: echo "The time was ${{ steps.hello.outputs.time }}"
