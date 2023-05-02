@@ -10,4 +10,3 @@ jobs:
       uses: akevalion/PharoTestsAction@v1
       with:
         removes-repo: 'roassal, numberic'
-    - name: Get the output
