@@ -2,7 +2,7 @@
 
 env := Smalltalk os environment.
 cout := Stdio stdout.
-cout << '\x1b[31mJajaja\x1b[0m'.
+cout << '\e[31mRed Text\e[0m \e[32mGreen Text\e[0m'.
 cout crlf.
 cout << ((env at: 'GITHUB_WORKSPACE' ifAbsent: [ 'nogithub'])).
 
