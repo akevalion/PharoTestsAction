@@ -2,7 +2,6 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const {execSync} = require('child_process');
 
-const path = require('path');
 const fs = require('fs');
 
 try {
@@ -17,7 +16,7 @@ try {
 
     console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash'));
 
-    fs.readdir('.', function (err, files) {
+    fs.readdir(__dirname, function (err, files) {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         } 
