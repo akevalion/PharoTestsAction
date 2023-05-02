@@ -7,7 +7,7 @@ cout crlf.
 repoPath := env at: 'GITHUB_WORKSPACE'.
 [ Metacello new
     baseline: 'PharoTestsAction';
-    repository: last;
+    repository: 'gitlocal://', last;
     load ] on: MCMergeOrLoadWarning do: [:warning | warning load ].
 
 cout << repoPath.

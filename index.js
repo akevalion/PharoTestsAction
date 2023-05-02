@@ -23,11 +23,11 @@ try {
     //console.log(`Removing: ${nameToGreet}`);
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
     const file = path.join(__dirname, '/runTest.st');
-    const rest = run ('./pharo --headless Pharo.image '+file);
+    const rest = run ('./pharo --headless Pharo.image '+ __dirname);
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
         console.log('\x1b[31m', 'Some Errors :V');
-        //console.log(new Buffer.from(rest).toString());
+        console.log(new Buffer.from(rest).toString());
         console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
         core.setFailed(`Here be dragons!
                  ___====-_  _-====___
