@@ -12,7 +12,7 @@ try {
     console.log(`The event payload: ${payload}`);
 
     console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash'));
-    console.log(execSync('ls ./'));
+    console.log(execSync('ls -all'));
     //console.log('./pharo --headless Pharo.image ./scripts/runTest.st');
 
   } catch (error) {
