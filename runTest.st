@@ -1,7 +1,8 @@
 | env cout file last repoPath actionRepo|
 env := Smalltalk os environment.
 cout := Stdio stdout.
-actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'.
+"actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'."
+actionRepo := CommandLineArguments default arguments last.
 cout << 'loading: ' << actionRepo.
 cout crlf.
 repoPath := env at: 'GITHUB_WORKSPACE'.
