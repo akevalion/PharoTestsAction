@@ -11,7 +11,7 @@ try {
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
 
-    exec('./run.sh', (error,stdout, stderr)=> {
+    exec('sh ./run.sh', (error,stdout, stderr)=> {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
