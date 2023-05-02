@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const {execSync} = require('child_process');
 
+const path = require('path');
 const fs = require('fs');
 
 try {
@@ -11,22 +12,15 @@ try {
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
     // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`);
+    //const payload = JSON.stringify(github.context.payload, undefined, 2)
+    //console.log(`The event payload: ${payload}`);
 
+    
     console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash'));
+    const file = Path.join(__dirname, 'runTest.st');
+    console.log(fs.existsSync(path));
 
-    fs.readdir(__dirname, function (err, files) {
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        } 
-        //listing all files using forEach
-        files.forEach(function (file) {
-            // Do whatever you want to do with the file
-            console.log(file); 
-        });
-    });
-    console.log(execSync('./pharo --headless Pharo.image ./runTest.st'));
+    console.log(execSync('./pharo --headless Pharo.image '+file));
 
   } catch (error) {
     core.setFailed(error.message);
