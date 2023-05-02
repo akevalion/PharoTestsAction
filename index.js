@@ -17,17 +17,6 @@ try {
 
     console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash'));
 
-    fs.readdir(__dirname, function (err, files) {
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        } 
-        //listing all files using forEach
-        files.forEach(function (file) {
-            // Do whatever you want to do with the file
-            console.log(file); 
-        });
-    });
-    console.log('...');
     fs.readdir('.', function (err, files) {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
@@ -38,7 +27,7 @@ try {
             console.log(file); 
         });
     });
-    //console.log('./pharo --headless Pharo.image ./scripts/runTest.st');
+    console.log('./pharo --headless Pharo.image ./runTest.st');
 
   } catch (error) {
     core.setFailed(error.message);
