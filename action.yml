@@ -1,8 +1,8 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Pharo CI'
+description: 'To load and run tests from a pharo project'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  repo:  # id of input
+    description: 'Package'
     required: true
     default: 'World'
 outputs:

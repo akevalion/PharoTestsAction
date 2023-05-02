@@ -7,7 +7,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: akevalion/PharoTestsAction@v1
+      uses: akevalion/PharoTestsAction
       with:
         who-to-greet: 'Milton F'
     # Use the output from the `hello` step
