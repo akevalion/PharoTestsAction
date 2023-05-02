@@ -23,7 +23,7 @@ try {
     //console.log(`Removing: ${nameToGreet}`);
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
     const file = path.join(__dirname, '/runTest.st');
-    const rest = run ('./pharo --headless Pharo.image');
+    const rest = run ('./pharo --headless Pharo.image '+file);
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
         console.log('\x1b[31m', 'Some Errors :V');
