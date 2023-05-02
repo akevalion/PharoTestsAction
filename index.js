@@ -7,7 +7,11 @@ const fs = require('fs');
 
 function run(command){
     console.log('Running: '+command);
-    console.log(execSync(command));
+    console.log('>>>');
+    const res = execSync(command);
+    console.log(res);
+    console.log('<<<');
+    console.log(typeof res);
 }
 try {
     // `repo` input defined in action metadata file
