@@ -11,7 +11,7 @@ try {
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
 
-    exec('sh run.sh', (error,stdout, stderr)=> {
+    exec('curl -L https://get.pharo.org/64/alpha+vm | bash', (error,stdout, stderr)=> {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
