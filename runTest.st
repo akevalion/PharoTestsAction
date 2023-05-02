@@ -1,11 +1,11 @@
-| env cout file last |
+| env cout file last repoPath actionRepo|
 env := Smalltalk os environment.
 cout := Stdio stdout.
-actionRepo := FileLocator workingDirectory absolutePath pathString.
+actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'.
 cout << 'loading: ' << actionRepo.
 cout crlf.
 repoPath := env at: 'GITHUB_WORKSPACE'.
-FileLocator workingDirectory allChildren do: [ :f | 
+actionRepo asFileReference allChildren do: [ :f | 
 cout << f absolutePath pathString.
 cout crlf ].
 "[ Metacello new
