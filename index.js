@@ -11,16 +11,12 @@ try {
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
 
-    exec('sh ./run.sh', (error,stdout, stderr)=> {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
+    exec('sh run.sh', (error,stdout, stderr)=> {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            console.log(`exec error: ${error}`);
         }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
     } );
 
   } catch (error) {
