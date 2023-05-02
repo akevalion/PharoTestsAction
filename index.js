@@ -11,7 +11,7 @@ try {
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
 
-    console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash)'));
+    console.log(execSync('curl -L https://get.pharo.org/64/alpha+vm | bash'));
     console.log(execSync('ls'));
     //console.log('./pharo --headless Pharo.image ./scripts/runTest.st');
 
