@@ -10,6 +10,3 @@ jobs:
       uses: akevalion/PharoTestsAction@v1
       with:
         removes-repo: 'roassal, numberic'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"

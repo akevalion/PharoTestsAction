@@ -2,7 +2,7 @@
 
 env := Smalltalk os environment.
 cout := Stdio stdout.
-cout << 'hola mierdas'.
+cout << '\e[1;31m Jajaja \e[0m'.
 cout crlf.
 cout << ((env at: 'GITHUB_WORKSPACE' ifAbsent: [ 'nogithub'])).
 
