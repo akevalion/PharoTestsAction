@@ -10,3 +10,5 @@ jobs:
       uses: akevalion/PharoTestsAction@v1
       with:
         removes-repo: 'roassal, numberic'
+    - name: Get the output
+      run: echo -e "\e[31mRed Text\e[0m \e[32mGreen Text\e[0m"
