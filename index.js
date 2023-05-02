@@ -26,8 +26,26 @@ try {
     const rest = run ('./pharo --headless Pharo.image '+file);
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
+        console.log('\x1b[31m', 'Some Errors :V');
         console.log(new Buffer.from(rest).toString());
         console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
+        core.setFailed(`Here be dragons!
+                 ___====-_  _-====___
+           _--^^^#####//      \\\\#####^^^--_
+        _-^##########// (    ) \\\\##########^-_
+       -############//  |\\^^/|  \\\\############-
+     _/############//   (@::@)   \\\\############\\_
+    /#############((     \\\\//     ))#############\\
+   -###############\\\\    (oo)    //###############-
+  -#################\\\\  / VV \\  //#################-
+ -###################\\\\/      \\//###################-
+_#/|##########/\\######(   /\\   )######/\\##########|\\#_
+|/ |#/\\#/\\#/\\/  \\#/\\##\\  |  |  /##/\\#/  \\/\\#/\\#/\\#| \\|
+\`  |/  V  V  \`   V  \\#\\| |  | |/#/  V   '  V  V  \\|  '
+   \`   \`  \`      \`   / | |  | | \\   '      '  '   '
+                    (  | |  | |  )
+                   __\\ | |  | | /__
+                  (vvv(VVV)(VVV)vvv)`);
     }else {
         console.log('\x1b[32m', 'All test Passed!');
     }

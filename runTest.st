@@ -1,8 +1,16 @@
 | env cout file |
 env := Smalltalk os environment.
 cout := Stdio stdout.
+last := CommandLineArguments default arguments last.
+cout << 'loading: ', last.
 cout crlf.
-cout << ((env at: 'GITHUB_WORKSPACE' ifAbsent: [ 'nogithub'])).
+repoPath := env at: 'GITHUB_WORKSPACE'.
+[ Metacello new
+    baseline: 'PharoTestsAction';
+    repository: last;
+    load ] on: MCMergeOrLoadWarning do: [:warning | warning load ].
+
+cout << repoPath.
 file := '/tmp/testError.txt' asFileReference writeStream.
 file << 'se mamo'.
 file close.
