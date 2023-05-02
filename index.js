@@ -27,7 +27,7 @@ try {
             console.log(file); 
         });
     });
-    console.log('./pharo --headless Pharo.image ./runTest.st');
+    console.log(execSync('./pharo --headless Pharo.image ./runTest.st'));
 
   } catch (error) {
     core.setFailed(error.message);
