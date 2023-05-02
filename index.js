@@ -26,6 +26,8 @@ try {
     //console.log(file);
     const rest = run ('./pharo --headless Pharo.image '+file);
     console.log(new Buffer.from(rest).toString());
+    console.log('\e[31mRed Text\e[0m \e[32mGreen Text\e[0m');
+    console.log('\x1b[36m%s\x1b[0m', 'I am cyan');
   } catch (error) {
     core.setFailed(error.message);
   }
