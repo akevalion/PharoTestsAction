@@ -1,13 +1,13 @@
-| env cout file |
+| env cout file last |
 env := Smalltalk os environment.
 cout := Stdio stdout.
-last := CommandLineArguments default arguments last.
-cout << 'loading: ' << last.
+actionRepo := FileLocator workingDirectory absolutePath pathString.
+cout << 'loading: ' << actionRepo.
 cout crlf.
 repoPath := env at: 'GITHUB_WORKSPACE'.
 [ Metacello new
     baseline: 'PharoTestsAction';
-    repository: 'gitlocal://', last;
+    repository: 'gitlocal://', actionRepo;
     load ] on: MCMergeOrLoadWarning do: [:warning | warning load ].
 
 cout << repoPath.
