@@ -2,7 +2,7 @@
 env := Smalltalk os environment.
 cout := Stdio stdout.
 last := CommandLineArguments default arguments last.
-cout << 'loading: ', last.
+cout << 'loading: ' << last.
 cout crlf.
 repoPath := env at: 'GITHUB_WORKSPACE'.
 [ Metacello new

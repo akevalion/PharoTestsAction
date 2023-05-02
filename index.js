@@ -27,7 +27,7 @@ try {
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
         console.log('\x1b[31m', 'Some Errors :V');
-        console.log(new Buffer.from(rest).toString());
+        //console.log(new Buffer.from(rest).toString());
         console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
         core.setFailed(`Here be dragons!
                  ___====-_  _-====___
