@@ -12,6 +12,7 @@ function run(command){
     console.log(res);
     console.log('<<<');
     console.log(typeof res);
+    return res;
 }
 try {
     // `repo` input defined in action metadata file
@@ -27,8 +28,8 @@ try {
     run ('curl -L https://get.pharo.org/64/alpha+vm | bash')
     const file = path.join(__dirname, '/runTest.st');
     console.log(file);
-    console.log(fs.existsSync(file));
-    run ('./pharo --headless Pharo.image '+file);
+    const rest = run ('./pharo --headless Pharo.image '+file);
+    console.log(new Buffer.from(rest).toString());
   } catch (error) {
     core.setFailed(error.message);
   }
