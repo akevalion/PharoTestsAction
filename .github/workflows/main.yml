@@ -3,7 +3,7 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to tests code
+    name: A job to test pharo code
     steps:
     - name: Run pharo Tests
       id: tests

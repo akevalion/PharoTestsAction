@@ -27,9 +27,9 @@ try {
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
         console.log(new Buffer.from(rest).toString());
-        console.log('\x1b[41m', fs.readFileSync(errorFile, 'utf8'));
+        console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
     }else {
-        console.log('\x1b[42m', 'All test Passed!');
+        console.log('\x1b[32m', 'All test Passed!');
     }
   } catch (error) {
     core.setFailed(error.message);
