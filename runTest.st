@@ -7,7 +7,7 @@ group := env at: 'ACTION_GROUP'.
 tests := env at: 'ACTION_TESTS'.
 
 actionRepo := CommandLineArguments default arguments last asFileReference parent absolutePath pathString.
-actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ].
+"actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ]."
 cout 
     << 'Loading action repository: ';
     << ('gitlocal://', actionRepo);
