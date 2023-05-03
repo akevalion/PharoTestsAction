@@ -38,7 +38,8 @@ try {
         'git config --global user.name "David504"',
         'git config --global user.email "david504@bass.slap"',
         'git commit -m "Bass"'];
-    run(commands.join(' && '));
+
+    run(commands.join(' && '));//this will fix .git folder and the runTests.st can load this current version into the image
     const rest = run ('./pharo --headless Pharo.image ' + file);
 
     const errorFile = path.join('/tmp', '/testError.txt');
