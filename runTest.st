@@ -8,17 +8,16 @@ tests := env at: 'ACTION_TESTS'.
 
 "actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'."
 actionRepo := CommandLineArguments default arguments last asFileReference parent absolutePath pathString.
-"actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ]."
+actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ].
 cout << 'Loading action repository: ' << ('gitlocal://', actionRepo).
-cout crlf;
-    << regExp;crlf;
-    << baseline;crlf;
-    << group; crlf;
-    << tests; crlf.
+
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
-    load ] onErrorDo: [:ex | cout << ex signalerContext longStack ].
+    load ] onErrorDo: [:ex | 
+        cout
+            << ex asString; crlf; 
+            << ex signalerContext shortStack ].
 
 "This object can create an error file to know if tests are good or not, and its used by index.js"
 "IOPharoTestsRunner new
