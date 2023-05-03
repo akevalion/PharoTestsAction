@@ -4,7 +4,9 @@ const {execSync} = require('child_process');
 
 const path = require('path');
 const fs = require('fs');
-
+function trace(anObject){
+    return new Buffer.from(anObject).toString()
+}
 function run(command){
     console.log('Running: '+command);
     const res = execSync(command);
@@ -33,7 +35,7 @@ try {
 
     
     run('git init'); // we do not have a git here
-    console.log(run('git rev-parse --show-toplevel'));
+    console.log(trace(run('git rev-parse --show-toplevel')));
     run('git add -A'); // we try to create one
     run('git config --global user.name "David504"')
     run('git config --global user.email "david504@bass.slap"')
@@ -44,7 +46,7 @@ try {
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
         console.log('\x1b[31m', 'Some Errors :V');
-        console.log(new Buffer.from(rest).toString());
+        console.log(trace(rest));
         console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
         core.setFailed(`Here be dragons!
                  ___====-_  _-====___
@@ -64,7 +66,7 @@ _#/|##########/\\######(   /\\   )######/\\##########|\\#_
                    __\\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)`);
     }else {
-        console.log(new Buffer.from(rest).toString());
+        console.log(trace(rest));
         console.log('\x1b[32m', 'All test Passed!');
     }
   } catch (error) {
