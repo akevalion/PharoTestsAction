@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     name: CI for the action
     steps:
-        #to kill old run in th CI
+        #to kill old run in the CI server
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.0
         with:
@@ -39,7 +39,7 @@ jobs:
         id: tests
         uses: akevalion/PharoTestsAction@v1
         with:
-          # removes-repo: 'Roassal' # String separated by commas, it will remove packages using: `'Roassal*' match: package name`
+          # removes-repo: 'Roassal, Numeric' # String separated by commas, it will remove packages using: `'Roassal*' match: package name`
           baseline: 'PharoTestsAction'
           group: 'default'
           tests: 'PharoTests' # same as `removes-repo` it will use
@@ -47,4 +47,4 @@ jobs:
 ```
 ### Contact
 
-Just submit and issue and I will fix the repo :D.
+Just submit an issue and I will fix the repo :D.
