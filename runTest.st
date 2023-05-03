@@ -9,7 +9,10 @@ tests := env at: 'ACTION_TESTS'.
 "actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'."
 actionRepo := CommandLineArguments default arguments last asFileReference parent absolutePath pathString.
 actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ].
-cout << 'Loading action repository: ' << ('gitlocal://', actionRepo).
+cout 
+    << 'Loading action repository: ';
+    << ('gitlocal://', actionRepo);
+    crlf.
 
 [Metacello new
     baseline: 'PharoTestsAction';

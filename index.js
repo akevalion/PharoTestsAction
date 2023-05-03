@@ -31,15 +31,14 @@ try {
     process.env['ACTION_TESTS'] = tests;
 
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
-    const file = path.join(__dirname, '/runTest.st');
+    let file =  path.join(__dirname, '/runTest.st');
 
-    run('cd '+__dirname);
-    run('git init'); // we do not have a git here
-    //console.log(trace(run('git rev-parse --show-toplevel')));
-    run('git add -A'); // we try to create one
-    run('git config --global user.name "David504"')
-    run('git config --global user.email "david504@bass.slap"')
-    run('git commit -m "Bass"'); // we create a 
+    run('cd '+__dirname + ' && git init && git add -A && git config --global username "David504" && git config --global user.email "david504@bass.slap" && git commit -m "Bass" ');
+    //run('git init'); 
+    //run('git add -A'); 
+    //run('git config --global user.name "David504"')
+    //run('git config --global user.email "david504@bass.slap"')
+    //run('git commit -m "Bass"'); 
 
     const rest = run ('./pharo --headless Pharo.image ' + file);
 
