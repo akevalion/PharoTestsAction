@@ -13,7 +13,7 @@ cout crlf.
     repository: actionRepo;
     load ] on: MCMergeOrLoadWarning do: [:warning | warning load ].
 
-IPPharoTestsRunner new
+IOPharoTestsRunner new
     remove: regExp;
     load: baseline group: group;
     runTests.
