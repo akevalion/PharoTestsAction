@@ -63,7 +63,7 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 { #category : #removing }
 IOPharoTestsRunner >> remove: aString [
 	aString = '.' ifTrue: [ 
-		cout << 'IO: nothing to remove!'.
+		cout << 'IO: nothing to remove!'; crlf.
 		^ self ].
 	names := self splitString: aString.
 	names do: [ :each | self removeNamed: each ]
@@ -131,7 +131,7 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		crlf;
 		<< 'IO: ';
 		<< numberOfErrors asString; 
-		<<  ' passed test methods';
+		<<  ' error test methods';
 		crlf;
 		<< 'IO: ';
 		<< numberOfTestsMethods asString;
