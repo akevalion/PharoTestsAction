@@ -50,6 +50,9 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 	env := Smalltalk os environment.
 	repoPath := 'gitlocal://', (env at: 'GITHUB_WORKSPACE').
 	cout << '>>> Clonning from: '; << repoPath; crlf.
+	aBaselineName = 'PharoTestsAction' ifTrue: [ 
+		cout << 'Already loaded'.
+		^ self ].
 	[ Metacello new
     baseline: aBaselineName;
     repository: repoPath;
