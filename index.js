@@ -32,8 +32,13 @@ try {
 
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
     let file =  path.join(__dirname, '/runTest.st');
-
-    run('cd '+__dirname + ' && git init && git add -A && git config --global username "David504" && git config --global user.email "david504@bass.slap" && git commit -m "Bass" ');
+    const commads = [ 
+        'cd '+__dirname,
+        'git init && git add -A',
+        'git config --global user.name "David504"',
+        'git config --global user.email "david504@bass.slap"',
+        'git commit -m "Bass"'];
+    run(commands.join(' && '));
     //run('git init'); 
     //run('git add -A'); 
     //run('git config --global user.name "David504"')
