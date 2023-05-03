@@ -20,7 +20,7 @@ cout crlf;
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
-    load ] onErrorDo: [:ex | cout << error signalerContext longStack ].
+    load ] onErrorDo: [:ex | cout << ex signalerContext longStack ].
 
 "This object can create an error file to know if tests are good or not, and its used by index.js"
 "IOPharoTestsRunner new
