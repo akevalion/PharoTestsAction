@@ -9,4 +9,6 @@ jobs:
       id: tests
       uses: akevalion/PharoTestsAction@v1
       with:
-        removes-repo: 'roassal, numberic'
+        removes-repo: 'do not remove'
+        baseline: 'PharoTestsAction'
+        group: 'default'
