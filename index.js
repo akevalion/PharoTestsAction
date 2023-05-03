@@ -33,7 +33,7 @@ try {
 
     
     run('git init'); // we do not have a git here
-    console.log('git rev-parse --show-toplevel');
+    console.log(run('git rev-parse --show-toplevel'));
     run('git add -A'); // we try to create one
     run('git config --global user.name "David504"')
     run('git config --global user.email "david504@bass.slap"')
