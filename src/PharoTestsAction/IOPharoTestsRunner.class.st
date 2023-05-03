@@ -62,6 +62,9 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 
 { #category : #removing }
 IOPharoTestsRunner >> remove: aString [
+	aString = '.' ifTrue: [ 
+		cout << 'IO: nothing to remove!'.
+		^ self ].
 	names := self splitString: aString.
 	names do: [ :each | self removeNamed: each ]
 
