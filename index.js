@@ -39,12 +39,6 @@ try {
         'git config --global user.email "david504@bass.slap"',
         'git commit -m "Bass"'];
     run(commands.join(' && '));
-    //run('git init'); 
-    //run('git add -A'); 
-    //run('git config --global user.name "David504"')
-    //run('git config --global user.email "david504@bass.slap"')
-    //run('git commit -m "Bass"'); 
-
     const rest = run ('./pharo --headless Pharo.image ' + file);
 
     const errorFile = path.join('/tmp', '/testError.txt');

@@ -6,7 +6,6 @@ baseline := env at: 'ACTION_BASELINE'.
 group := env at: 'ACTION_GROUP'.
 tests := env at: 'ACTION_TESTS'.
 
-"actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'."
 actionRepo := CommandLineArguments default arguments last asFileReference parent absolutePath pathString.
 actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ].
 cout 
@@ -17,15 +16,16 @@ cout
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
-    load ] onErrorDo: [:ex | 
+    load.
+"This object can create an error file to know if tests are good or not, and its used by index.js"
+IOPharoTestsRunner new
+    remove: regExp;
+    load: baseline group: group;
+    runTests: tests.
+
+ ] onErrorDo: [:ex | 
         cout
             << ex asString; crlf; 
             << ex signalerContext shortStack ].
-
-"This object can create an error file to know if tests are good or not, and its used by index.js"
-"IOPharoTestsRunner new
-    remove: regExp;
-    load: baseline group: group;
-    runTests."
 
 SmalltalkImage current quitPrimitive
