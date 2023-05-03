@@ -50,6 +50,7 @@ _#/|##########/\\######(   /\\   )######/\\##########|\\#_
                    __\\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)`);
     }else {
+        console.log(new Buffer.from(rest).toString());
         console.log('\x1b[32m', 'All test Passed!');
     }
   } catch (error) {
