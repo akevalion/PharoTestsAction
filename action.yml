@@ -4,7 +4,7 @@ inputs:
   removes-repo:  # id of input
     description: 'Name of packages to remove'
     required: false
-    default: '.'
+    default: '.' # if default it will not remove anything
   baseline:  # id of input
     description: 'The baseline name of the project to test'
     required: true
@@ -12,7 +12,7 @@ inputs:
   group:  # id of input
     description: 'The baseline group to load'
     required: false
-    default: '.'
+    default: 'default'
   tests: # id of input
     description: 'A string to run a group of tests, separated by commas'
     required: true
