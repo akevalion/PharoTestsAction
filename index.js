@@ -32,7 +32,7 @@ try {
 
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
     let file =  path.join(__dirname, '/runTest.st');
-    const commads = [ 
+    const commands = [ 
         'cd '+__dirname,
         'git init && git add -A',
         'git config --global user.name "David504"',
