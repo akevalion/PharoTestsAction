@@ -51,7 +51,7 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 	repoPath := 'gitlocal://', (env at: 'GITHUB_WORKSPACE').
 	cout << '>>> Clonning from: '; << repoPath; crlf.
 	aBaselineName = 'PharoTestsAction' ifTrue: [ 
-		cout << 'Already loaded'.
+		cout << 'Already loaded'; crlf.
 		^ self ].
 	[ Metacello new
     baseline: aBaselineName;
@@ -95,12 +95,14 @@ IOPharoTestsRunner >> runTests: aString [
 
 { #category : #actions }
 IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
-	| unitTests numberOfPassed |
-	cout << '>>> Running tests: '; crlf.
+	| unitTests numberOfPassed numberOfTestsMethods |
+	cout << '>>> Running tests for: '; <<aString; crlf.
 	unitTests := self unitTestsFor: aString.
 	numberOfPassed := 0.
+	numberOfTestsMethods := 0.
 	unitTests do: [ :unitTestClass | | suite res |
 		suite := unitTestClass buildSuite.
+		numberOfTestsMethods := numberOfTestsMethods + suite tests size.
 		res := suite resultClass new.
 		suite setUp.
 		[ suite tests do: [ :each | 
@@ -124,7 +126,7 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		<< numberOfPassed asString; 
 		crlf;
 		<< 'NUMBER OF TEST METHODS=';
-		<< (unitTests flatCollect: [ :cls | cls buildSuite tests ]) size asString;
+		<< numberOfTestsMethods asString;
 		crlf;
 		<< 'END';
 		crlf.
@@ -136,21 +138,11 @@ IOPharoTestsRunner >> splitString: aString [
 ]
 
 { #category : #actions }
-IOPharoTestsRunner >> unitTests [
-	^ (names flatCollect: [ :name | | regExp |
-		regExp := '*', name , '*'.
-		TestCase withAllSubclasses
-			select: [ :cls | name match: cls package packageName ] ])
-		sorted: [ :a :b | a name < b name ]
-		
-]
-
-{ #category : #actions }
 IOPharoTestsRunner >> unitTestsFor: aString [
 	^ ((self splitString: aString) flatCollect: [ :name | | regExp |
 		regExp := '*', name , '*'.
 		TestCase withAllSubclasses
-			select: [ :cls | name match: cls package packageName ] ])
+			select: [ :cls | regExp match: cls package packageName ] ])
 		sorted: [ :a :b | a name < b name ]
 		
 ]
