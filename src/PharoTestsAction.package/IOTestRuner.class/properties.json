@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "akevalion 5/2/2023 18:19",
+	"super" : "Object",
+	"category" : "PharoTestsAction",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "IOTestRuner",
+	"type" : "normal"
+}
