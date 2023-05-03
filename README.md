@@ -9,6 +9,6 @@ In pharo 11 run:
 ```Smalltalk
 Metacello new
     baseline: 'PharoTestsAction';
-    repository: github://akevalion/PharoTestsAction;
+    repository: 'github://akevalion/PharoTestsAction';
     load
 ```
