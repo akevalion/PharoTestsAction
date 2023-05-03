@@ -49,9 +49,9 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 	| env repoPath |
 	env := Smalltalk os environment.
 	repoPath := 'gitlocal://', (env at: 'GITHUB_WORKSPACE').
-	cout << '>>> Clonning from: '; << repoPath; crlf.
+	cout << 'IO: Clonning from '; << repoPath; crlf.
 	aBaselineName = 'PharoTestsAction' ifTrue: [ 
-		cout << 'Already loaded'; crlf.
+		cout << 'IO: PharoTestsAction already loaded'; crlf.
 		^ self ].
 	[ Metacello new
     baseline: aBaselineName;
@@ -95,11 +95,13 @@ IOPharoTestsRunner >> runTests: aString [
 
 { #category : #actions }
 IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
-	| unitTests numberOfPassed numberOfTestsMethods |
-	cout << '>>> Running tests for: '; <<aString; crlf.
+	| unitTests numberOfPassed numberOfErrors numberOfTestsMethods |
+	cout << 'IO: Running tests for `'; <<aString; << '`'; crlf.
 	unitTests := self unitTestsFor: aString.
 	numberOfPassed := 0.
+	numberOfErrors := 0.
 	numberOfTestsMethods := 0.
+	
 	unitTests do: [ :unitTestClass | | suite res |
 		suite := unitTestClass buildSuite.
 		numberOfTestsMethods := numberOfTestsMethods + suite tests size.
@@ -108,6 +110,7 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		[ suite tests do: [ :each | 
 			[ each debug.
 			numberOfPassed := numberOfPassed + 1 ] onErrorDo: [ :error |
+				numberOfErrors := numberOfErrors + 1.
 				stream << 'Error: ' << each asString.
 				stream crlf.
 				stream << error signalerContext shortStack.
@@ -119,16 +122,19 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		 ].
 	cout 
 		crlf;
-		<< 'NUMBER OF UNIT TESTS=';
+		<< 'IO: ';
 		<< unitTests size asString;
+		<< ' test classes';
 		crlf;
-		<< 'NUMBER OF PASSED TEST METHODS=';
+		<< 'IO: ';
 		<< numberOfPassed asString; 
+		<<  ' passed test methods';
 		crlf;
-		<< 'NUMBER OF TEST METHODS=';
+		<< 'IO: ';
 		<< numberOfTestsMethods asString;
+		<< ' test methods';
 		crlf;
-		<< 'END';
+		<< 'IO: Running tests completed!';
 		crlf.
 ]
 
