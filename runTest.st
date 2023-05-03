@@ -5,7 +5,7 @@ regExp := env at: 'ACTION_REGEX_STRING'.
 baseline := env at: 'ACTION_BASELINE'.
 group := env at: 'ACTION_GROUP'.
 "actionRepo := '/home/runner/work/_actions/akevalion/PharoTestsAction/v1'."
-actionRepo := 'https://github.com/akevalion/PharoTestsAction.git'.
+actionRepo := 'github://akevalion/PharoTestsAction'.
 cout << 'loading repo from action: ' << actionRepo.
 cout crlf.
 [ Metacello new
