@@ -82,19 +82,19 @@ IOPharoTestsRunner >> repos [
 ]
 
 { #category : #actions }
-IOPharoTestsRunner >> runTests [
+IOPharoTestsRunner >> runTests: aString [
 	| errorFile |
 	errorFile := '/tmp/testError.txt' asFileReference.
-	errorFile writeStreamDo: [ :stream | self runTestsOn: stream ].
+	errorFile writeStreamDo: [ :stream | self runTests: aString onErrorStream: stream ].
 	errorFile contents ifEmpty: [ errorFile delete ].
 	
 ]
 
 { #category : #actions }
-IOPharoTestsRunner >> runTestsOn: stream [
+IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 	| unitTests numberOfPassed |
 	cout << '>>> Running tests: '; crlf.
-	unitTests := self unitTests.
+	unitTests := self unitTestsFor: aString.
 	numberOfPassed := 0.
 	unitTests do: [ :unitTestClass | | suite res |
 		suite := unitTestClass buildSuite.
@@ -135,6 +135,16 @@ IOPharoTestsRunner >> splitString: aString [
 { #category : #actions }
 IOPharoTestsRunner >> unitTests [
 	^ (names flatCollect: [ :name | | regExp |
+		regExp := '*', name , '*'.
+		TestCase withAllSubclasses
+			select: [ :cls | name match: cls package packageName ] ])
+		sorted: [ :a :b | a name < b name ]
+		
+]
+
+{ #category : #actions }
+IOPharoTestsRunner >> unitTestsFor: aString [
+	^ ((self splitString: aString) flatCollect: [ :name | | regExp |
 		regExp := '*', name , '*'.
 		TestCase withAllSubclasses
 			select: [ :cls | name match: cls package packageName ] ])
