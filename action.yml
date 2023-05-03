@@ -5,7 +5,15 @@ inputs:
     description: 'Name of packages to remove'
     required: true
     default: '.'
-  
+  baseline:  # id of input
+    description: 'The baseline of the project to test'
+    required: true
+    default: '.'
+  group:  # id of input
+    description: 'the baseline group to load'
+    required: true
+    default: '.'
+
 outputs:
   time: # id of output
     description: 'The current time'
