@@ -3,14 +3,18 @@ description: 'To load and run tests from a pharo project'
 inputs:
   removes-repo:  # id of input
     description: 'Name of packages to remove'
-    required: true
+    required: false
     default: '.'
   baseline:  # id of input
-    description: 'The baseline of the project to test'
+    description: 'The baseline name of the project to test'
     required: true
     default: '.'
   group:  # id of input
-    description: 'the baseline group to load'
+    description: 'The baseline group to load'
+    required: false
+    default: '.'
+  tests: # id of input
+    description: 'A string to run a group of tests, separated by commas'
     required: true
     default: '.'
 

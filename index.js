@@ -15,18 +15,28 @@ try {
     const repositoriesToRemove = core.getInput('removes-repo');
     const baseline = core.getInput('baseline');
     const group = core.getInput('group');
+    const tests = core.getInput('tests');
 
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
+
     // Get the JSON webhook payload for the event that triggered the workflow
     //const payload = JSON.stringify(github.context.payload, undefined, 2)
     //console.log(`The event payload: ${payload}`);
     process.env['ACTION_REGEX_STRING'] = repositoriesToRemove;
     process.env['ACTION_BASELINE'] = baseline;
     process.env['ACTION_GROUP'] = group;
+    process.env['ACTION_TESTS'] = tests;
+
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
     const file = path.join(__dirname, '/runTest.st');
-    const rest = run ('./pharo --headless Pharo.image '+file);
+
+    run('git init'); // we do not have a git here
+    run('git add -A'); // we try to create one
+    run('git commit -m "Bass"'); // we create a 
+
+    const rest = run ('./pharo --headless Pharo.image ' + file);
+
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
         console.log('\x1b[31m', 'Some Errors :V');
