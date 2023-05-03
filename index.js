@@ -31,7 +31,9 @@ try {
     console.log(run ('curl -L https://get.pharo.org/64/alpha+vm | bash'))
     const file = path.join(__dirname, '/runTest.st');
 
+    
     run('git init'); // we do not have a git here
+    console.log('git rev-parse --show-toplevel');
     run('git add -A'); // we try to create one
     run('git config --global user.name "David504"')
     run('git config --global user.email "david504@bass.slap"')
