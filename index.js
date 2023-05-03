@@ -33,6 +33,8 @@ try {
 
     run('git init'); // we do not have a git here
     run('git add -A'); // we try to create one
+    run('git config --global user.name "David504"')
+    run('git config --global user.email "david504@bass.slap"')
     run('git commit -m "Bass"'); // we create a 
 
     const rest = run ('./pharo --headless Pharo.image ' + file);
