@@ -121,18 +121,21 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 			 ] ] ensure: [ suite tearDown ]
 		 ].
 	cout 
-		crlf;
 		<< 'IO: ';
 		<< unitTests size asString;
-		<< ' test classes';
+		<< ' test classes in total';
 		crlf;
 		<< 'IO: ';
 		<< numberOfPassed asString; 
 		<<  ' passed test methods';
 		crlf;
 		<< 'IO: ';
+		<< numberOfErrors asString; 
+		<<  ' passed test methods';
+		crlf;
+		<< 'IO: ';
 		<< numberOfTestsMethods asString;
-		<< ' test methods';
+		<< ' test methods int total';
 		crlf;
 		<< 'IO: Running tests completed!';
 		crlf.
