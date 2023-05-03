@@ -5,10 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to test pharo code
     steps:
-    - name: Run pharo Tests
-      id: tests
-      uses: akevalion/PharoTestsAction@v1
-      with:
-        removes-repo: 'do not remove'
-        baseline: 'PharoTestsAction'
-        group: 'default'
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+      
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Run pharo Tests
+        id: tests
+        uses: akevalion/PharoTestsAction@v1
+        with:
+          removes-repo: 'do not remove'
+          baseline: 'PharoTestsAction'
+          group: 'default'
