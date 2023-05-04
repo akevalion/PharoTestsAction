@@ -34,8 +34,8 @@ try {
     let file =  path.join(__dirname, '/runTest.st');
     const commands = [ 
         'cd '+__dirname,
-        'git config --global advice.statusHints false',
-        'git init && git add -A',
+        'git -c init.defaultBranch=master init',
+        'git add -A',
         'git config --global user.name "David504"',
         'git config --global user.email "david504@bass.slap"',
         'git commit -m "Bass"'];
