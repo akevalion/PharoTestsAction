@@ -116,7 +116,7 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 			[ 
 				[each announce: TestCaseStarted withResult: res.
 				each runCaseManaged.
-				each announce: TestCaseEnded  withResult: res.
+				each announce: TestCaseEnded withResult: res.
 				numberOfPassed := numberOfPassed + 1 ] on: Exception
 				do: [ :ex | ex class = TestResult skip ifFalse: [ ex pass ] ].
 			] on: Exception do: [ :error |
