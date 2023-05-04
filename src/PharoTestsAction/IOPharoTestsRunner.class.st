@@ -100,50 +100,56 @@ IOPharoTestsRunner >> runTests: aString [
 
 { #category : #actions }
 IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
-	| unitTests numberOfPassed numberOfErrors numberOfTestsMethods |
+	| unitTests numberOfPassed numberOfErrors numberOfTestsMethods numberOfSkipped set |
 	self show: 'Running tests for `', aString, '`'.
 	unitTests := self unitTestsFor: aString.
 	numberOfPassed := 0.
 	numberOfErrors := 0.
 	numberOfTestsMethods := 0.
-	
+	numberOfSkipped := 0.
+	set := Set new.
 	unitTests do: [ :unitTestClass | | suite res |
 		suite := unitTestClass buildSuite.
-		numberOfTestsMethods := numberOfTestsMethods + suite tests size.
-		res := suite resultClass new.
-		suite setUp.
-		[ suite tests do: [ :each | 
-			[ 
-				[each announce: TestCaseStarted withResult: res.
-				each runCaseManaged.
-				each announce: TestCaseEnded withResult: res.
-				numberOfPassed := numberOfPassed + 1 ] on: Exception
-				do: [ :ex | ex class = TestResult skip ifFalse: [ ex pass ] ].
-			] on: Exception do: [ :error |
-				numberOfErrors := numberOfErrors + 1.
-				stream << 'Error: ' << each asString.
-				stream crlf.
-				stream << error signalerContext shortStack.
-				stream crlf; crlf.
+		res := suite runWithAction: set block: [ :error :test |
+			stream
+				<< 'Error: ';
+				<< test asString;
+				crlf;
+				<< error signalerContext shortStack;
+				crlf; 
+				crlf.
 			].
-			suite announceTest: each.
-			suite changed: each.
-			 ] ] ensure: [ suite tearDown ]
-		 ].
+		numberOfTestsMethods := numberOfTestsMethods + res tests size.
+		numberOfPassed := numberOfPassed + res passed size.
+		numberOfErrors := numberOfErrors + res errors size.
+		numberOfSkipped := numberOfSkipped + res skipped size.
+	].
 	
-	cout crlf.
-	self 
-		show: 'TESTS RESULTS';
-		show: unitTests size asString, ' test classes in total';
-		show: numberOfPassed asString, ' passed test methods';
-		show: numberOfErrors asString, ' error test methods';
-		show: numberOfTestsMethods asString, ' test methods in total';
-		show:'Running tests completed!'
+	self showResult:
+		{ unitTests size.
+		numberOfPassed.
+		numberOfErrors.
+		numberOfSkipped.
+		numberOfTestsMethods}
 ]
 
 { #category : #actions }
 IOPharoTestsRunner >> show: aString [
 	cout << 'IO: ' << aString; crlf
+]
+
+{ #category : #actions }
+IOPharoTestsRunner >> showResult: aCollection [
+	| res |
+	res := aCollection collect: #asString.
+	self 
+		show: 'TESTS RESULTS';
+		show: res first, ' test classes in total';
+		show: res second, ' passed test methods';
+		show: res third, ' error test methods';
+		show: res fourth, ' skip test methods';
+		show: res fifth, ' test methods in total';
+		show:'Running tests completed!'
 ]
 
 { #category : #removing }
