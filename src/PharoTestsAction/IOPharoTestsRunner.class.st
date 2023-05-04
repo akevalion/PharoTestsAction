@@ -28,7 +28,7 @@ IOPharoTestsRunner >> cout: anObject [
 IOPharoTestsRunner >> defaultRepos [
 	^ Dictionary new
 		at: 'Roassal3' put: [ [ :a :b |
-			cout << 'IO: Updating fonts'; crlf.
+			self show: 'Updating fonts'.
 			FreeTypeFontProvider current updateFromSystem.
 			self loadDefault: a group: b ] ];
 		yourself
@@ -37,7 +37,7 @@ IOPharoTestsRunner >> defaultRepos [
 { #category : #initialization }
 IOPharoTestsRunner >> initialize [
 	super initialize.
-	cout := Stdio stdout.
+	self cout: Stdio stdout.
 ]
 
 { #category : #actions }
@@ -52,26 +52,26 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 	| env repoPath |
 	env := Smalltalk os environment.
 	repoPath := 'gitlocal://', (env at: 'GITHUB_WORKSPACE').
-	cout << 'IO: Clonning from '; << repoPath; crlf.
+	self show: 'Clonning from ', repoPath.
 	aBaselineName = 'PharoTestsAction' ifTrue: [ 
-		cout << 'IO: PharoTestsAction already loaded'; crlf.
+		self show: 'PharoTestsAction already loaded'.
 		^ self ].
-	[ Metacello new
-    baseline: aBaselineName;
-    repository: repoPath;
-    load: group ] on: MCMergeOrLoadWarning do: [ :warning | warning load ].
-	cout << 'IO: Finish baseline `'; << aBaselineName; << '`'; crlf.
+	[Metacello new
+		baseline: aBaselineName;
+		repository: repoPath;
+		load: group ] on: MCMergeOrLoadWarning do: [ :warning | warning load ].
+	self show: 'Finish baseline `', aBaselineName, '`'.
 ]
 
 { #category : #removing }
 IOPharoTestsRunner >> remove: aString [
 	aString = '.' ifTrue: [ 
-		cout << 'IO: Nothing to remove!'; crlf.
+		self show: 'Nothing to remove!'.
 		^ self ].
-	cout << 'IO: Removing packages `'; << aString; << '`'; crlf.
+	self show: 'Removing packages `', aString, '`'.
 	names := self splitString: aString.
 	names do: [ :each | self removeNamed: each ].
-	cout << 'IO: Remove completed'; crlf.
+	self show: 'Remove completed'.
 
 ]
 
@@ -101,7 +101,7 @@ IOPharoTestsRunner >> runTests: aString [
 { #category : #actions }
 IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 	| unitTests numberOfPassed numberOfErrors numberOfTestsMethods |
-	cout << 'IO: Running tests for `'; <<aString; << '`'; crlf.
+	self show: 'Running tests for `', aString, '`'.
 	unitTests := self unitTestsFor: aString.
 	numberOfPassed := 0.
 	numberOfErrors := 0.
@@ -125,27 +125,20 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 			suite changed: each.
 			 ] ] ensure: [ suite tearDown ]
 		 ].
-	cout 
-		crlf;
-		<< 'IO: TESTS RESULTS'; crlf;
-		<< 'IO: ';
-		<< unitTests size asString;
-		<< ' test classes in total';
-		crlf;
-		<< 'IO: ';
-		<< numberOfPassed asString; 
-		<<  ' passed test methods';
-		crlf;
-		<< 'IO: ';
-		<< numberOfErrors asString; 
-		<<  ' error test methods';
-		crlf;
-		<< 'IO: ';
-		<< numberOfTestsMethods asString;
-		<< ' test methods in total';
-		crlf;
-		<< 'IO: Running tests completed!';
-		crlf.
+	
+	cout crlf.
+	self 
+		show: 'TESTS RESULTS';
+		show: unitTests size asString, ' test classes in total';
+		show: numberOfPassed asString, ' passed test methods';
+		show: numberOfErrors asString, ' error test methods';
+		show: numberOfTestsMethods asString, ' test methods in total';
+		show:'IO: Running tests completed!'
+]
+
+{ #category : #actions }
+IOPharoTestsRunner >> show: aString [
+	cout << 'IO: ' << aString; crlf
 ]
 
 { #category : #removing }
