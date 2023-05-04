@@ -20,4 +20,4 @@ jobs:
           # removes-repo: ''
           baseline: 'PharoTestsAction'
           group: 'default'
-          tests: 'PharoTests'
+          tests: 'PharoTestsAction-Tests'
