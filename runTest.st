@@ -7,10 +7,10 @@ group := env at: 'ACTION_GROUP'.
 tests := env at: 'ACTION_TESTS'.
 
 actionRepo := CommandLineArguments default arguments last asFileReference parent absolutePath pathString.
-"actionRepo asFileReference allChildren do: [:each | cout << each absolutePath pathString; crlf ]."
+
 cout 
-    << 'Loading action repository: ';
-    << ('gitlocal://', actionRepo);
+    << 'Loading action repository: gitlocal://';
+    << actionRepo;
     crlf.
 "To remove metacello notifactions"
 MetacelloNotification compile: 'defaultAction'.
@@ -19,8 +19,9 @@ NewUndeclaredWarning compile: 'defaultAction'.
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
     load.
-"This object can create an error file to know if tests are good or not, and its used by index.js"
+cout << 'PharoTestsAction baseline loaded!'; crlf.
 cout << 'IO: Ready! :V'; crlf.
+"This object can create an error file to know if tests are good or not, and its used by index.js"
 #IOPharoTestsRunner asClass new
     remove: regExp;
     load: baseline group: group;
