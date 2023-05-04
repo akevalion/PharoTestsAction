@@ -19,8 +19,11 @@ NewUndeclaredWarning compile: 'defaultAction'.
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
     load.
-cout << 'PharoTestsAction baseline loaded!'; crlf.
-cout << 'IO: Ready! :V'; crlf.
+cout 
+    << 'PharoTestsAction baseline loaded';
+    crlf;
+    << 'IO: Ready! :V';
+    crlf.
 "This object can create an error file to know if tests are good or not, and its used by index.js"
 #IOPharoTestsRunner asClass new
     remove: regExp;
