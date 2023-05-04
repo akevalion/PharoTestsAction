@@ -7,7 +7,7 @@ TestResult >> runCase: aTestCase block: aBlock [
 		aTestCase runCaseManaged.
 		aTestCase announce: TestCaseEnded withResult: self.
 		self addPass: aTestCase
-	] on: self class failure , self class skip, self class warning, self class error do: [ :ex |
+	] on: Exception do: [ :ex |
 		ex actionAnnounce: aTestCase toResult: self
 	]
 ]
