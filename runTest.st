@@ -22,7 +22,7 @@ NewUndeclaredWarning compile: 'defaultAction'.
 cout 
     << 'PharoTestsAction baseline loaded';
     crlf;
-    << 'IO: Ready! :V';
+    << 'IO: Ready :V';
     crlf.
 "This object can create an error file to know if tests are good or not, and its used by index.js"
 #IOPharoTestsRunner asClass new
