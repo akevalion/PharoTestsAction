@@ -115,6 +115,8 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 			stream
 				<< 'Error: ';
 				<< test asString;
+				<< ' --- ';
+				<< error asString;
 				crlf;
 				<< error signalerContext shortStackCrlf;
 				crlf.
