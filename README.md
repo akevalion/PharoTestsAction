@@ -20,21 +20,18 @@ Just create a `.github/workflows/main.yml` with this content:
 on: [push]
 
 jobs:
-  hello_world_job:
+  ActionJob:
     runs-on: ubuntu-latest
     name: CI for the action
     steps:
-        #to kill old run in the CI server
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.0
         with:
           access_token: ${{ github.token }}
-
-        # very important to use the current branch in the CI process
+      # This method will download the .git folder very usefull to load the baseline with Metacello
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-        # call this action
       - name: Run pharo Tests
         id: tests
         uses: akevalion/PharoTestsAction@v1
@@ -42,8 +39,7 @@ jobs:
           # removes-repo: 'Roassal, Numeric' # String separated by commas, it will remove packages using: `'Roassal*' match: package name`
           baseline: 'PharoTestsAction'
           group: 'default'
-          tests: 'PharoTests' # same as `removes-repo` it will use
-
+          tests: 'PharoTestsAction-Tests'
 ```
 ### Contact
 
