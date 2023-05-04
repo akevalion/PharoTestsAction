@@ -113,8 +113,13 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		res := suite resultClass new.
 		suite setUp.
 		[ suite tests do: [ :each | 
-			[ each debug.
-			numberOfPassed := numberOfPassed + 1 ] onErrorDo: [ :error |
+			[ 
+				[each announce: TestCaseStarted withResult: res.
+				each runCaseManaged.
+				each announce: TestCaseEnded  withResult: res.
+				numberOfPassed := numberOfPassed + 1 ] on: Exception
+				do: [ :ex | ex class = TestResult skip ifFalse: [ ex pass ] ].
+			] on: Exception do: [ :error |
 				numberOfErrors := numberOfErrors + 1.
 				stream << 'Error: ' << each asString.
 				stream crlf.
