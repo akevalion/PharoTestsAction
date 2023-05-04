@@ -1,4 +1,4 @@
-name: 'Pharo CI'
+name: 'David504CI'
 description: 'To load and run tests from a pharo project'
 inputs:
   removes-repo:  # id of input
@@ -24,3 +24,7 @@ outputs:
 runs:
   using: 'node16'
   main: 'index.js'
+
+branding:
+  icon: 'activity'
+  color: 'green'
