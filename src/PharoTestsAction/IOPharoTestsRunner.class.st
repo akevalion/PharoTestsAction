@@ -27,10 +27,10 @@ IOPharoTestsRunner >> cout: anObject [
 { #category : #default }
 IOPharoTestsRunner >> defaultRepos [
 	^ Dictionary new
-		at: 'Roassal3' put: [ [ :a :b |
+		at: 'Roassal3' put: [ :a :b |
 			self show: 'Updating fonts'.
 			FreeTypeFontProvider current updateFromSystem.
-			self loadDefault: a group: b ] ];
+			self loadDefault: a group: b ];
 		yourself
 ]
 
