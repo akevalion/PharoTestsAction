@@ -133,7 +133,7 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		show: numberOfPassed asString, ' passed test methods';
 		show: numberOfErrors asString, ' error test methods';
 		show: numberOfTestsMethods asString, ' test methods in total';
-		show:'IO: Running tests completed!'
+		show:'Running tests completed!'
 ]
 
 { #category : #actions }
