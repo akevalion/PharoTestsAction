@@ -1,8 +1,10 @@
 Extension { #name : #Exception }
 
 { #category : #'*PharoTestsAction' }
-Exception >> actionAnnounce: aTestCase toResult: aTestResult [
+Exception >> processActionBlock: ablock test: aTestCase [
+	ablock value: self value: aTestCase
+]
 
-	aTestResult addError: aTestCase.
-	self pass
+{ #category : #'*PharoTestsAction' }
+Exception >> sunitAnnounce: a toResult: b [
 ]

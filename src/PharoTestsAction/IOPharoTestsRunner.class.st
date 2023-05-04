@@ -100,13 +100,14 @@ IOPharoTestsRunner >> runTests: aString [
 
 { #category : #actions }
 IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
-	| unitTests numberOfPassed numberOfErrors numberOfTestsMethods numberOfSkipped set |
+	| unitTests numberOfPassed numberOfErrors numberOfTestsMethods numberOfSkipped set numberOfFailures |
 	self show: 'Running tests for `', aString, '`'.
 	unitTests := self unitTestsFor: aString.
 	numberOfPassed := 0.
 	numberOfErrors := 0.
 	numberOfTestsMethods := 0.
 	numberOfSkipped := 0.
+	numberOfFailures := 0.
 	set := Set new.
 	unitTests do: [ :unitTestClass | | suite res |
 		suite := unitTestClass buildSuite.
@@ -115,20 +116,21 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 				<< 'Error: ';
 				<< test asString;
 				crlf;
-				<< error signalerContext shortStack;
-				crlf; 
+				<< error signalerContext shortStackCrlf;
 				crlf.
 			].
 		numberOfTestsMethods := numberOfTestsMethods + res tests size.
 		numberOfPassed := numberOfPassed + res passed size.
 		numberOfErrors := numberOfErrors + res errors size.
 		numberOfSkipped := numberOfSkipped + res skipped size.
+		numberOfFailures := numberOfFailures + res failures size.
 	].
 	
 	self showResult:
 		{ unitTests size.
 		numberOfPassed.
 		numberOfErrors.
+		numberOfFailures.
 		numberOfSkipped.
 		numberOfTestsMethods}
 ]
@@ -147,8 +149,9 @@ IOPharoTestsRunner >> showResult: aCollection [
 		show: res first, ' test classes in total';
 		show: res second, ' passed test methods';
 		show: res third, ' error test methods';
-		show: res fourth, ' skip test methods';
-		show: res fifth, ' test methods in total';
+		show: res fourth, ' failures test methods';
+		show: res fifth, ' skip test methods';
+		show: res sixth, ' test methods in total';
 		show:'Running tests completed!'
 ]
 

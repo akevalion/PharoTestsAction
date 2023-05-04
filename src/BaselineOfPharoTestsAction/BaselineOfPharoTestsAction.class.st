@@ -11,6 +11,10 @@ BaselineOfPharoTestsAction >> baseline: spec [
 		spec 
 			package: #'PharoTestsAction';
 			package: #'PharoTestsAction-Tests';
-			group: 'default' with: #('PharoTestsAction' 'PharoTestsAction-Tests')
+			package: #'PharoTestsActionDummy-Tests';
+			group: 'default' with: #(
+				'PharoTestsAction'
+				'PharoTestsAction-Tests'
+				'PharoTestsActionDummy-Tests')
 	]
 ]
