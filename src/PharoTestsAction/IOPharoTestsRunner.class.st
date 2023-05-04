@@ -124,7 +124,7 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 		 ].
 	cout 
 		crlf;
-		<< 'IO: TESTS RESULTS'; crfl;
+		<< 'IO: TESTS RESULTS'; crlf;
 		<< 'IO: ';
 		<< unitTests size asString;
 		<< ' test classes in total';
