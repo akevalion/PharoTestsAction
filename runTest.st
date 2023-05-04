@@ -30,9 +30,13 @@ cout
     load: baseline group: group;
     runTests: tests.
 
- ] onErrorDo: [:ex | 
-        cout
+ ] onErrorDo: [:ex | | errorFile |
+    errorFile := '/tmp/testError.txt' asFileReference.
+    errorFile writeStreamDo: [ :stream | 
+        stream
             << ex asString; crlf; 
-            << ex signalerContext shortStack ].
+            << ex signalerContext shortStack
+    ]
+].
 
 SmalltalkImage current quitPrimitive

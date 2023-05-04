@@ -70,7 +70,7 @@ IOPharoTestsRunner >> remove: aString [
 		^ self ].
 	cout << 'IO: Removing packages`'; << aString; << '`'; crlf.
 	names := self splitString: aString.
-	names do: [ :each | self removeNamed: each ]
+	names do: [ :each | self removeNamed: each ].
 	cout << 'IO: Remove completed'; crlf; crlf.
 
 ]
