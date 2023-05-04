@@ -57,7 +57,7 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
     baseline: aBaselineName;
     repository: repoPath;
     load: group ] on: MCMergeOrLoadWarning do: [ :warning | warning load ].
-	
+	cout << 'IO: finish baseline `' << aBaselineName << '`'
 ]
 
 { #category : #removing }
@@ -65,8 +65,10 @@ IOPharoTestsRunner >> remove: aString [
 	aString = '.' ifTrue: [ 
 		cout << 'IO: nothing to remove!'; crlf.
 		^ self ].
+	cout << 'IO: removing packages`'; << aString; << '`'; crlf.
 	names := self splitString: aString.
 	names do: [ :each | self removeNamed: each ]
+	cout << 'IO: remove completed'; crlf; crlf.
 
 ]
 
@@ -121,6 +123,8 @@ IOPharoTestsRunner >> runTests: aString onErrorStream: stream [
 			 ] ] ensure: [ suite tearDown ]
 		 ].
 	cout 
+		crlf;
+		<< 'IO: TESTS RESULTS'; crfl;
 		<< 'IO: ';
 		<< unitTests size asString;
 		<< ' test classes in total';

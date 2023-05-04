@@ -12,13 +12,15 @@ cout
     << 'Loading action repository: ';
     << ('gitlocal://', actionRepo);
     crlf.
-
+"To remove metacello notifactions"
+MetacelloNotification compile: 'defaultAction'.
+NewUndeclaredWarning compile: 'defaultAction'.
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
     load.
 "This object can create an error file to know if tests are good or not, and its used by index.js"
-IOPharoTestsRunner new
+#IOPharoTestsRunner asString new
     remove: regExp;
     load: baseline group: group;
     runTests: tests.
