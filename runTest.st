@@ -13,8 +13,10 @@ cout
     << actionRepo;
     crlf.
 "To remove metacello notifactions"
-MetacelloNotification compile: 'defaultAction'.
+MetacelloNotification compile: 'defaultAction'."TODO add a configuration to enable or disable this action"
 NewUndeclaredWarning compile: 'defaultAction'.
+MCGitBasedNetworkRepository compile: 'traceCr: aString'.
+
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
