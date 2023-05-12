@@ -21,4 +21,4 @@ jobs:
           baseline: 'PharoTestsAction'
           group: 'default'
           tests: 'PharoTestsAction-Tests'
-          pharo: 'Pharo11'
+          pharo: 'pharo10'
