@@ -17,6 +17,10 @@ inputs:
     description: 'A string to run a group of tests, separated by commas'
     required: true
     default: '.'
+  pharo: # id of input
+    description: 'A pharo version, can be pharo9, pharo10 or pharo11'
+    required: false
+    default: '64/alpha+vm'
 
 outputs:
   time: # id of output

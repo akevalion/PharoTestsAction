@@ -1,4 +1,4 @@
-| env cout file last repoPath actionRepo regExp baseline group tests |
+| env cout file last repoPath actionRepo regExp baseline group tests currentTime |
 env := Smalltalk os environment.
 cout := Stdio stdout.
 regExp := env at: 'ACTION_REGEX_STRING'.
@@ -16,11 +16,12 @@ cout
 MetacelloNotification compile: 'defaultAction'."TODO add a configuration to enable or disable this action"
 NewUndeclaredWarning compile: 'defaultAction'.
 MCGitBasedNetworkRepository compile: 'traceCr: aString'.
-
+currentTime := DateAndTime now.
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
     load.
+currentTime := DateAndTime now.
 cout 
     << 'PharoTestsAction baseline loaded';
     crlf;
@@ -32,7 +33,7 @@ cout
     load: baseline group: group;
     runTests: tests.
 
- ] onErrorDo: [:ex | | errorFile |
+ ] on: Exception do: [:ex | | errorFile |
     errorFile := '/tmp/testError.txt' asFileReference.
     errorFile writeStreamDo: [ :stream | 
         stream
@@ -40,5 +41,7 @@ cout
             << ex signalerContext shortStack
     ]
 ].
-
+cout crlf.
+cout << 'Duration: ' << (DateAndTime now - currentTime) humanReadablePrintString.
+coout crlf.
 SmalltalkImage current quitPrimitive

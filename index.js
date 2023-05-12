@@ -18,20 +18,26 @@ try {
     const baseline = core.getInput('baseline');
     const group = core.getInput('group');
     const tests = core.getInput('tests');
+    let pharoVM = core.getInput('pharo');
 
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
 
-    // Get the JSON webhook payload for the event that triggered the workflow
-    //const payload = JSON.stringify(github.context.payload, undefined, 2)
-    //console.log(`The event payload: ${payload}`);
+    const map = {
+        "pharo9":"90+vm",
+        "pharo10": "100+vm",
+        "pharo11": "110+vm"
+    };
+    if(map[pharoVM] === undefined)
+        pharoVM = '64/alpha+vm';
+    
     process.env['ACTION_REGEX_STRING'] = repositoriesToRemove;
     process.env['ACTION_BASELINE'] = baseline;
     process.env['ACTION_GROUP'] = group;
     process.env['ACTION_TESTS'] = tests;
 
-    run ('curl -L https://get.pharo.org/64/alpha+vm | bash');
-    let file =  path.join(__dirname, '/runTest.st');
+    run ('curl -L https://get.pharo.org/' + pharoVM +' | bash');
+    let file = path.join(__dirname, '/runTest.st');
     const commands = [ 
         'cd '+__dirname,
         'git -c init.defaultBranch=master init',
@@ -69,6 +75,6 @@ _#/|##########/\\######(   /\\   )######/\\##########|\\#_
         console.log(trace(rest));
         console.log('\x1b[32m', 'All test Passed!');
     }
-  } catch (error) {
+} catch (error) {
     core.setFailed(error.message);
-  }
+}
