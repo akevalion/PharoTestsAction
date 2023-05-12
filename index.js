@@ -21,14 +21,14 @@ try {
     let pharoVM = core.getInput('pharo');
 
     const time = (new Date()).toTimeString();
-    core.setOutput("time", time);
+    core.setOutput("time", pharoVM);
 
     const map = {
-        "pharo9":"90+vm",
+        "pharo9": "90+vm",
         "pharo10": "100+vm",
         "pharo11": "110+vm"
     };
-    if(map[pharoVM] === undefined)
+    if(map[pharoVM] == undefined)
         pharoVM = '64/alpha+vm';
     
     process.env['ACTION_REGEX_STRING'] = repositoriesToRemove;
