@@ -30,6 +30,8 @@ try {
     };
     if(map[pharoVM] == undefined)
         pharoVM = '64/alpha+vm';
+    else
+        pharoVM = map[pharoVM];
     
     process.env['ACTION_REGEX_STRING'] = repositoriesToRemove;
     process.env['ACTION_BASELINE'] = baseline;
