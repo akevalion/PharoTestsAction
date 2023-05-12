@@ -43,5 +43,5 @@ cout
 ].
 cout crlf.
 cout << 'Duration: ' << (DateAndTime now - currentTime) humanReadablePrintString.
-coout crlf.
+cout crlf.
 SmalltalkImage current quitPrimitive
