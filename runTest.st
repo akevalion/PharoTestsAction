@@ -38,7 +38,7 @@ cout
     errorFile writeStreamDo: [ :stream | 
         stream
             << ex asString; crlf; 
-            << ex signalerContext shortStack
+            << ex signalerContext longStack
     ]
 ].
 cout crlf.
