@@ -17,7 +17,6 @@ MetacelloNotification compile: 'defaultAction'."TODO add a configuration to enab
 NewUndeclaredWarning compile: 'defaultAction'.
 MCGitBasedNetworkRepository compile: 'traceCr: aString'.
 currentTime := DateAndTime now.
-cout << MetacelloStackCacheNotification signal asString; crlf.
 [Metacello new
     baseline: 'PharoTestsAction';
     repository: 'gitlocal://', actionRepo;
@@ -34,7 +33,7 @@ cout
     load: baseline group: group;
     runTests: tests.
 
- ] on: Exception do: [:ex | | errorFile |
+ ] onErrorDo: [:ex | | errorFile |
     errorFile := '/tmp/testError.txt' asFileReference.
     errorFile writeStreamDo: [ :stream | 
         stream
