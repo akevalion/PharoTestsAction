@@ -19,15 +19,16 @@ try {
     const group = core.getInput('group');
     const tests = core.getInput('tests');
     let pharoVM = core.getInput('pharo');
-
+    console.log(pharoVM);
     const time = (new Date()).toTimeString();
-    core.setOutput("time", pharoVM);
+    core.setOutput("time", time);
 
     const map = {
         "pharo9": "90+vm",
         "pharo10": "100+vm",
         "pharo11": "110+vm"
     };
+    console.log(map[pharoVM] == undefined);
     if(map[pharoVM] == undefined)
         pharoVM = '64/alpha+vm';
     
