@@ -20,6 +20,11 @@ try {
     const tests = core.getInput('tests');
     let pharoVM = core.getInput('pharo').toLowerCase();
     
+    process.env['ACTION_REGEX_STRING'] = repositoriesToRemove;
+    process.env['ACTION_BASELINE'] = baseline;
+    process.env['ACTION_GROUP'] = group;
+    process.env['ACTION_TESTS'] = tests;
+
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
 
@@ -32,14 +37,9 @@ try {
         pharoVM = '64/alpha+vm';
     else
         pharoVM = map[pharoVM];
-    
-    process.env['ACTION_REGEX_STRING'] = repositoriesToRemove;
-    process.env['ACTION_BASELINE'] = baseline;
-    process.env['ACTION_GROUP'] = group;
-    process.env['ACTION_TESTS'] = tests;
 
     run ('curl -L https://get.pharo.org/' + pharoVM +' | bash');
-    let file = path.join(__dirname, '/runTest.st');
+    
     const commands = [ 
         'cd '+__dirname,
         'git -c init.defaultBranch=master init',
@@ -48,8 +48,10 @@ try {
         'git config --global user.email "david504@bass.slap"',
         'git commit -m "Bass"'];
 
-    //run(commands.join(' && '));//this will fix .git folder and the runTests.st can load this current version into the image
-    const rest = run ('./pharo --headless Pharo.image ' + file);
+    run(commands.join(' && '));//this will fix .git folder and the runTests.st can load this current version into the image
+
+    let file = path.join(__dirname, '/runTest.st');
+    const rest = run('./pharo --headless Pharo.image ' + file);
 
     const errorFile = path.join('/tmp', '/testError.txt');
     if (fs.existsSync(errorFile)){
