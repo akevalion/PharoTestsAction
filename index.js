@@ -18,8 +18,8 @@ try {
     const baseline = core.getInput('baseline');
     const group = core.getInput('group');
     const tests = core.getInput('tests');
-    let pharoVM = core.getInput('pharo');
-    console.log(pharoVM);
+    let pharoVM = core.getInput('pharo').toLowerCase();
+    
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
 
@@ -28,7 +28,6 @@ try {
         "pharo10": "100+vm",
         "pharo11": "110+vm"
     };
-    console.log(map[pharoVM] == undefined);
     if(map[pharoVM] == undefined)
         pharoVM = '64/alpha+vm';
     
