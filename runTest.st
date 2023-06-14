@@ -1,4 +1,4 @@
-| env cout file last repoPath actionRepo regExp baseline group tests currentTime |
+| env cout file last repoPath actionRepo regExp baseline group tests currentTime category |
 env := Smalltalk os environment.
 cout := Stdio stdout.
 regExp := env at: 'ACTION_REGEX_STRING'.
@@ -12,10 +12,11 @@ cout
     << 'Loading action repository: gitlocal://';
     << actionRepo;
     crlf.
+category := 'haroTestsAction'.
 "To remove metacello notifactions"
-MetacelloNotification compile: 'defaultAction'."TODO add a configuration to enable or disable this action"
-NewUndeclaredWarning compile: 'defaultAction'.
-MCGitBasedNetworkRepository compile: 'traceCr: aString'.
+MetacelloNotification compile: 'defaultAction' classified: category."TODO add a configuration to enable or disable this action"
+NewUndeclaredWarning compile: 'defaultAction' classified: category.
+MCGitBasedNetworkRepository compile: 'traceCr: aString' classified: category.
 currentTime := DateAndTime now.
 [Metacello new
     baseline: 'PharoTestsAction';
