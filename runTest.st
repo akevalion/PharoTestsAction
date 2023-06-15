@@ -17,6 +17,7 @@ category := 'haroTestsAction'.
 MetacelloNotification compile: 'defaultAction' classified: category."TODO add a configuration to enable or disable this action"
 NewUndeclaredWarning compile: 'defaultAction' classified: category.
 MCGitBasedNetworkRepository compile: 'traceCr: aString' classified: category.
+ReleaseTest compile: 'testObsoleteClasses' classified: 'tests'.
 currentTime := DateAndTime now.
 [Metacello new
     baseline: 'PharoTestsAction';
