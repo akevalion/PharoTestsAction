@@ -18,6 +18,7 @@ MetacelloNotification compile: 'defaultAction' classified: category."TODO add a 
 NewUndeclaredWarning compile: 'defaultAction' classified: category.
 MCGitBasedNetworkRepository compile: 'traceCr: aString' classified: category.
 ReleaseTest compile: 'testObsoleteClasses' classified: 'tests'.
+ReleaseTest compile: 'testPharoVersionFileExists' classified: 'tests'.
 currentTime := DateAndTime now.
 [Metacello new
     baseline: 'PharoTestsAction';
