@@ -80,7 +80,7 @@ IOPharoTestsRunner >> removeNamed: aString [
 	| regExp packages |
 	regExp := '*', aString, '*'.
 	packages := RPackageOrganizer default packages
-		select: [ :each | regExp match: each packageName ].
+		select: [ :each | regExp match: each name ].
 	packages do: [ :each | each removeFromSystem ].
 ]
 
@@ -167,7 +167,7 @@ IOPharoTestsRunner >> unitTestsFor: aString [
 	^ ((self splitString: aString) flatCollect: [ :name | | regExp |
 		regExp := '*', name , '*'.
 		TestCase withAllSubclasses
-			select: [ :cls | regExp match: cls package packageName ] ])
+			select: [ :cls | regExp match: cls package name ] ])
 		sorted: [ :a :b | a name < b name ]
 		
 ]
