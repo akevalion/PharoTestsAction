@@ -26,11 +26,14 @@ IOPharoTestsRunner >> cout: anObject [
 
 { #category : #default }
 IOPharoTestsRunner >> defaultRepos [
+	| block |
+	block := [ :a :b |
+		self show: 'Updating fonts'.
+		FreeTypeFontProvider current updateFromSystem.
+		self loadDefault: a group: b ].
 	^ Dictionary new
-		at: 'Roassal' put: [ :a :b |
-			self show: 'Updating fonts'.
-			FreeTypeFontProvider current updateFromSystem.
-			self loadDefault: a group: b ];
+		at: 'Roassal' put: block;
+		at: 'Roassal3' put: block;
 		yourself
 ]
 
@@ -44,7 +47,7 @@ IOPharoTestsRunner >> initialize [
 IOPharoTestsRunner >> load: aRepoString group: aGroupString [
 	self repos at: aRepoString
 		ifPresent: [ :block | block value: aRepoString value: aGroupString ] 
-		ifAbsent: [ self loadDefault: aRepoString group: 'default' ].
+		ifAbsent: [ self loadDefault: aRepoString group: aGroupString ].
 ]
 
 { #category : #actions }
@@ -56,6 +59,7 @@ IOPharoTestsRunner >> loadDefault: aBaselineName group: group [
 	aBaselineName = 'PharoTestsAction' ifTrue: [ 
 		self show: 'PharoTestsAction already loaded'.
 		^ self ].
+	self show: 'Group: ', group asString.
 	[Metacello new
 		baseline: aBaselineName;
 		repository: repoPath;
