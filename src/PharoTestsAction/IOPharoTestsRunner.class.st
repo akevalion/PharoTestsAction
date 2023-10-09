@@ -82,10 +82,10 @@ IOPharoTestsRunner >> remove: aString [
 { #category : #removing }
 IOPharoTestsRunner >> removeNamed: aString [
 	| regExp packages |
-	aString = 'Roassal' ifTrue: [
+	"aString = 'Roassal' ifTrue: [
 		RSWorldMenu class methods do: [ :each | each removeFromSystem ].
 		RSWorldMenu class compile: 'foo: a <worldMenu>'.
-	]. 
+	]." 
 	regExp := '*', aString, '*'.
 	packages := RPackageOrganizer default packages
 		select: [ :each | regExp match: each name ].
