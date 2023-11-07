@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const {execSync} = require('child_process');
+const {execSync, spawn} = require('child_process');
 
 const path = require('path');
 const fs = require('fs');
@@ -12,6 +12,26 @@ function run(command){
     const res = execSync(command);
     return res;
 }
+function dragon(){
+    return `Here be dragons!
+                 ___====-_  _-====___
+           _--^^^#####//      \\\\#####^^^--_
+        _-^##########// (    ) \\\\##########^-_
+       -############//  |\\^^/|  \\\\############-
+     _/############//   (@::@)   \\\\############\\_
+    /#############((     \\\\//     ))#############\\
+   -###############\\\\    (oo)    //###############-
+  -#################\\\\  / VV \\  //#################-
+ -###################\\\\/      \\//###################-
+_#/|##########/\\######(   /\\   )######/\\##########|\\#_
+|/ |#/\\#/\\#/\\/  \\#/\\##\\  |  |  /##/\\#/  \\/\\#/\\#/\\#| \\|
+\`  |/  V  V  \`   V  \\#\\| |  | |/#/  V   '  V  V  \\|  '
+   \`   \`  \`      \`   / | |  | | \\   '      '  '   '
+                    (  | |  | |  )
+                   __\\ | |  | | /__
+                  (vvv(VVV)(VVV)vvv)`;
+}
+
 try {
     // `repo` input defined in action metadata file
     const repositoriesToRemove = core.getInput('removes-repo');
@@ -52,33 +72,26 @@ try {
 
     let file = path.join(__dirname, '/runTest.st');
     const rest = run('./pharo --headless Pharo.image ' + file);
-
-    const errorFile = path.join('/tmp', '/testError.txt');
-    if (fs.existsSync(errorFile)){
-        console.log('\x1b[31m', 'Some Errors :V');
-        console.log(trace(rest));
-        console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
-        core.setFailed(`Here be dragons!
-                 ___====-_  _-====___
-           _--^^^#####//      \\\\#####^^^--_
-        _-^##########// (    ) \\\\##########^-_
-       -############//  |\\^^/|  \\\\############-
-     _/############//   (@::@)   \\\\############\\_
-    /#############((     \\\\//     ))#############\\
-   -###############\\\\    (oo)    //###############-
-  -#################\\\\  / VV \\  //#################-
- -###################\\\\/      \\//###################-
-_#/|##########/\\######(   /\\   )######/\\##########|\\#_
-|/ |#/\\#/\\#/\\/  \\#/\\##\\  |  |  /##/\\#/  \\/\\#/\\#/\\#| \\|
-\`  |/  V  V  \`   V  \\#\\| |  | |/#/  V   '  V  V  \\|  '
-   \`   \`  \`      \`   / | |  | | \\   '      '  '   '
-                    (  | |  | |  )
-                   __\\ | |  | | /__
-                  (vvv(VVV)(VVV)vvv)`);
-    }else {
-        console.log(trace(rest));
-        console.log('\x1b[32m', 'All test Passed!');
-    }
+    var spawn = spawn('./pharo', ['--headless', 'Pharo.image', file]);
+    spawn.stdout.on('data', function(msg){
+        process.stdout.write(msg);
+    });
+    spawn.stderr.on('data', function(msg){
+        process.stdout.write(msg);
+    });
+    spawn.on('exit', function(code){
+        const errorFile = path.join('/tmp', '/testError.txt');
+        if (fs.existsSync(errorFile)){
+            console.log('\x1b[31m', 'Some Errors :V');
+            console.log(trace(rest));
+            console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
+            core.setFailed(dragon());
+        }else {
+            console.log(trace(rest));
+            console.log('\x1b[32m', 'All test Passed!');
+        }
+    });
+    
 } catch (error) {
     core.setFailed(error.message);
 }
