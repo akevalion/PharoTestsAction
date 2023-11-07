@@ -87,7 +87,7 @@ try {
             console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
             core.setFailed(dragon());
         }else {
-            console.log(trace(rest));
+            console.log(`Pharo exited with code: ${code}`);
             console.log('\x1b[32m', 'All test Passed!');
         }
     });
