@@ -72,14 +72,14 @@ try {
 
     let file = path.join(__dirname, '/runTest.st');
     const rest = run('./pharo --headless Pharo.image ' + file);
-    var spawn = spawn('./pharo', ['--headless', 'Pharo.image', file]);
-    spawn.stdout.on('data', function(msg){
+    var eva = spawn('./pharo', ['--headless', 'Pharo.image', file]);
+    eva.stdout.on('data', function(msg){
         process.stdout.write(msg);
     });
-    spawn.stderr.on('data', function(msg){
+    eva.stderr.on('data', function(msg){
         process.stdout.write(msg);
     });
-    spawn.on('exit', function(code){
+    eva.on('exit', function(code){
         const errorFile = path.join('/tmp', '/testError.txt');
         if (fs.existsSync(errorFile)){
             console.log('\x1b[31m', 'Some Errors :V');
