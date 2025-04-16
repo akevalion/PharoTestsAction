@@ -83,7 +83,7 @@ try {
         const errorFile = path.join('/tmp', '/testError.txt');
         if (fs.existsSync(errorFile)){
             console.log('\x1b[31m', 'Some Errors :V');
-            console.log(trace(eva));
+            //console.log(trace(eva);
             console.log('\x1b[31m', fs.readFileSync(errorFile, 'utf8'));
             core.setFailed(dragon());
         }else {
