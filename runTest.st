@@ -6,7 +6,9 @@ baseline := env at: 'ACTION_BASELINE'.
 group := env at: 'ACTION_GROUP'.
 tests := env at: 'ACTION_TESTS'.
 
-actionRepo := CommandLineArguments default arguments last asFileReference parent absolutePath pathString.
+actionRepo := ((CommandLineArguments class canUnderstand: #default) 
+    ifTrue: [CommandLineArguments default]
+ifFalse: [CommandLineArguments new])arguments last asFileReference parent absolutePath pathString.
 
 cout 
     << 'Loading action repository: gitlocal://';
