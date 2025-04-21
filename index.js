@@ -51,7 +51,8 @@ try {
     const map = {
         "pharo9": "90+vm",
         "pharo10": "100+vm",
-        "pharo11": "110+vm"
+        "pharo11": "110+vm",
+        "pharo12": "120+vm",
     };
     if(map[pharoVM] == undefined)
         pharoVM = '64/alpha+vm';
