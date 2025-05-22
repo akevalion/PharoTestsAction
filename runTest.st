@@ -33,7 +33,7 @@ cout
     << 'IO: Ready :V';
     crlf.
 "This object can create an error file to know if tests are good or not, and its used by index.js"
-#IOPharoTestsRunner asClass new
+(Smalltalk at: #IOPharoTestsRunner) new
     remove: regExp;
     load: baseline group: group;
     runTests: tests.
