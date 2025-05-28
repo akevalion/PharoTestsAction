@@ -1,4 +1,4 @@
-name: 'David504CI'
+name: 'PharoTestsActionByTinchodias'
 description: 'To load and run tests from a pharo project'
 inputs:
   removes-repo:  # id of input
